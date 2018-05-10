@@ -2,8 +2,8 @@
 
 require_once 'PollBot.php';
 
-define('BOT_TOKEN', 'bot485853567:AAGTdBMBbL2IfXoowR3itZkXx484t-nG7kQ');
-define('BOT_WEBHOOK', 'https://testbot.mobibookapp.com/poll-bot-webhook.php');
+define('BOT_TOKEN', 'XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+define('BOT_WEBHOOK', 'https://bot.server/poll-bot-webhook.php');
 
 $bot = new PollBot(BOT_TOKEN, 'PollBotChat');
 
