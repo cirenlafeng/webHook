@@ -2,8 +2,8 @@
 
 require_once 'PollBot.php';
 
-define('BOT_TOKEN', 'XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-define('BOT_WEBHOOK', 'https://bot.server/poll-bot-webhook.php');
+define('BOT_TOKEN', '485853567:AAGTdBMBbL2IfXoowR3itZkXx484t-nG7kQ');
+define('BOT_WEBHOOK', 'https://testbot.mobibookapp.com/poll-bot-webhook.php');
 
 $bot = new PollBot(BOT_TOKEN, 'PollBotChat');
 
@@ -20,7 +20,6 @@ $response = file_get_contents('php://input');
 $update = json_decode($response, true);
 
 $bot->init();
+$bot->onUpdateReceived($update);
 $bot->botSendMessage($update);
-// $bot->onUpdateReceived($update);
-
 
