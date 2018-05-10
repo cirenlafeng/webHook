@@ -139,6 +139,11 @@ class PollBotChat extends TelegramBotChat {
     }
   }
 
+  public function botSendMessage($text)
+  {
+    return $this->apiSendMessage($text);
+  }
+
   public function command_help($params, $message) {
     $this->sendHelp();
   }

@@ -20,4 +20,7 @@ $response = file_get_contents('php://input');
 $update = json_decode($response, true);
 
 $bot->init();
-$bot->onUpdateReceived($update);
+$bot->botSendMessage($update);
+// $bot->onUpdateReceived($update);
+
+
