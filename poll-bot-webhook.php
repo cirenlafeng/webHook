@@ -23,7 +23,7 @@ $update = json_decode($response, true);
 
 
 
-file_get_contents("https://api.telegram.org/bot".BOT_TOKEN."/sendMessage?chat_id=".$update['message']['chat']['id']."&text=".$update['message']['text']);
+file_get_contents("https://api.telegram.org/bot".BOT_TOKEN."/sendMessage?chat_id=".$update['message']['chat']['id']."&text=".$update['message']['text']."\n测试换行");
 // $bot->init();
 // $bot->onUpdateReceived($update);
 // $bot->botSendMessage("ABCD\nDEFG\rSSSS");
