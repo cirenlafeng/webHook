@@ -175,9 +175,7 @@ class PollBotChat extends TelegramBotChat {
   public function message($text, $message) {
       if(strlen($text) <= 6)
       {
-        $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".$text."&tsyms=USD"),true);
-        $this->apiSendMessage(json_encode($json));
-        return;
+        $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".str_replace("/", "", $text)."&tsyms=USD"),true);
         if(isset($json['RAW']))
         {
           $result = "@".$message['from']['first_name']." ".$message['from']['last_name']."\n";
@@ -190,7 +188,7 @@ class PollBotChat extends TelegramBotChat {
         }
       }
       
-      $this->apiSendMessage("Sorry invalid instruction :".$text."\n Please send like /BTC thank you");
+      $this->apiSendMessage("Sorry invalid instruction :".$text."\n Please send like /btc thank you");
       return;
       
   }
