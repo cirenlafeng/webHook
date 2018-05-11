@@ -20,5 +20,5 @@ $response = file_get_contents('php://input');
 $update = json_decode($response, true);
 $bot->init();
 // $bot->onUpdateReceived($update);
-$bot->botSendMessage(json_encode($update));
+$bot->botSendMessage("ABCD\nDEFG\rSSSS");
 
