@@ -173,50 +173,45 @@ class PollBotChat extends TelegramBotChat {
   }
 
   public function message($text, $message) {
-    if ($this->curPoll && $this->isGroup) {
-      $option = trim($text);
-      $option_id = array_search($option, $this->curPoll['options'], true);
-      if ($option_id !== false) {
-        $this->pollNewVote($message['from'], $option_id, $message['message_id']);
-      }
-    } else {
-      $author_id = $message['from']['id'];
-      $newpoll = $this->dbGetPollCreating($author_id);
-      if ($newpoll) {
-        if ($this->curPoll) {
-          $this->dbDropPollCreating($author_id);
-          $this->sendOnePollOnly();
-          return;
-        }
-        if ($newpoll['state'] == 'need_title') {
-          $title = trim($text);
-          $title = str_replace("\n", ' ', $title);
-          $title = mb_substr($title, 0, 1024, 'UTF-8');
-          if (!strlen($title)) {
-            $this->apiSendMessage("Sorry, I only support text and emoji for questions and answers.");
-            return;
-          }
-          $newpoll['title'] = $title;
-          $this->needPollOptions($author_id, $newpoll, $message['message_id']);
-        } else if ($newpoll['state'] == 'need_options') {
-          $option = trim($text);
-          $option = str_replace("\n", ' ', $option);
-          $option = mb_substr($option, 0, 256, 'UTF-8');
-          if (!strlen($option)) {
-            $this->apiSendMessage("Sorry, I only support text and emoji for questions and answers.");
-            return;
-          }
-          if (!in_array($option, $newpoll['options'], true)) {
-            $newpoll['options'][] = $option;
-          }
-          if (count($newpoll['options']) < self::$optionsLimit) {
-            $this->needPollOptions($author_id, $newpoll, $message['message_id']);
-          } else {
-            $this->createPoll($author_id, $newpoll);
-          }
-        }
-      }
-    }
+      $this->apiSendMessage("Test\n this is a test");
+      return;
+      // $author_id = $message['from']['id'];
+      // $newpoll = $this->dbGetPollCreating($author_id);
+      // if ($newpoll) {
+      //   if ($this->curPoll) {
+      //     $this->dbDropPollCreating($author_id);
+      //     $this->sendOnePollOnly();
+      //     return;
+      //   }
+      //   if ($newpoll['state'] == 'need_title') {
+      //     $title = trim($text);
+      //     $title = str_replace("\n", ' ', $title);
+      //     $title = mb_substr($title, 0, 1024, 'UTF-8');
+      //     if (!strlen($title)) {
+      //       $this->apiSendMessage("Sorry, I only support text and emoji for questions and answers.");
+      //       return;
+      //     }
+      //     $newpoll['title'] = $title;
+      //     $this->needPollOptions($author_id, $newpoll, $message['message_id']);
+      //   } else if ($newpoll['state'] == 'need_options') {
+      //     $option = trim($text);
+      //     $option = str_replace("\n", ' ', $option);
+      //     $option = mb_substr($option, 0, 256, 'UTF-8');
+      //     if (!strlen($option)) {
+      //       $this->apiSendMessage("Sorry, I only support text and emoji for questions and answers.");
+      //       return;
+      //     }
+      //     if (!in_array($option, $newpoll['options'], true)) {
+      //       $newpoll['options'][] = $option;
+      //     }
+      //     if (count($newpoll['options']) < self::$optionsLimit) {
+      //       $this->needPollOptions($author_id, $newpoll, $message['message_id']);
+      //     } else {
+      //       $this->createPoll($author_id, $newpoll);
+      //     }
+      //   }
+      // }
+    
   }
 
 
