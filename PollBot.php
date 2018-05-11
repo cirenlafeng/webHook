@@ -173,45 +173,24 @@ class PollBotChat extends TelegramBotChat {
   }
 
   public function message($text, $message) {
-      $this->apiSendMessage("Test\n this is a test");
+      if(strlen($text) <= 6)
+      {
+        $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".$text."&tsyms=USD"),true);
+        if(isset($json['RAW']))
+        {
+          $result = "@".$message['from']['first_name']." ".$message['from']['last_name']."\n";
+          $result.= "Name: ".str_replace("/", "", $text)."\n";
+          $result.= "Price(24h): $".$json['RAW'][$text]['USD']['PRICE']."\n";
+          $result.= "Change(24h): ".round($json['RAW'][$text]['USD']['CHANGEPCT24HOUR'],2)."\n";
+          $result.= "Volume(24h): ".(int) $json['RAW'][$text]['USD']['VOLUME24HOUR']."\n";
+          $this->apiSendMessage($result);
+          return;
+        }
+      }
+      
+      $this->apiSendMessage("Sorry invalid instruction :".$text."\n Please send like /btc thank you");
       return;
-      // $author_id = $message['from']['id'];
-      // $newpoll = $this->dbGetPollCreating($author_id);
-      // if ($newpoll) {
-      //   if ($this->curPoll) {
-      //     $this->dbDropPollCreating($author_id);
-      //     $this->sendOnePollOnly();
-      //     return;
-      //   }
-      //   if ($newpoll['state'] == 'need_title') {
-      //     $title = trim($text);
-      //     $title = str_replace("\n", ' ', $title);
-      //     $title = mb_substr($title, 0, 1024, 'UTF-8');
-      //     if (!strlen($title)) {
-      //       $this->apiSendMessage("Sorry, I only support text and emoji for questions and answers.");
-      //       return;
-      //     }
-      //     $newpoll['title'] = $title;
-      //     $this->needPollOptions($author_id, $newpoll, $message['message_id']);
-      //   } else if ($newpoll['state'] == 'need_options') {
-      //     $option = trim($text);
-      //     $option = str_replace("\n", ' ', $option);
-      //     $option = mb_substr($option, 0, 256, 'UTF-8');
-      //     if (!strlen($option)) {
-      //       $this->apiSendMessage("Sorry, I only support text and emoji for questions and answers.");
-      //       return;
-      //     }
-      //     if (!in_array($option, $newpoll['options'], true)) {
-      //       $newpoll['options'][] = $option;
-      //     }
-      //     if (count($newpoll['options']) < self::$optionsLimit) {
-      //       $this->needPollOptions($author_id, $newpoll, $message['message_id']);
-      //     } else {
-      //       $this->createPoll($author_id, $newpoll);
-      //     }
-      //   }
-      // }
-    
+      
   }
 
 
