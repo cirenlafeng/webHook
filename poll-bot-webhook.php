@@ -18,7 +18,12 @@ if (php_sapi_name() == 'cli') {
 
 $response = file_get_contents('php://input');
 $update = json_decode($response, true);
-file_get_contents("https://api.telegram.org/bot485853567:AAGTdBMBbL2IfXoowR3itZkXx484t-nG7kQ/sendMessage?chat_id=-1001277519693&text=".$response);
+
+
+
+
+
+file_get_contents("https://api.telegram.org/bot".BOT_TOKEN."/sendMessage?chat_id=".$update['message']['chat']['id']."&text=".$update['message']['text']);
 // $bot->init();
 // $bot->onUpdateReceived($update);
 // $bot->botSendMessage("ABCD\nDEFG\rSSSS");
