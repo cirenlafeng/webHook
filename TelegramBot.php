@@ -176,39 +176,8 @@ class TelegramBot extends TelegramBotCore {
       $chat_id = intval($message['chat']['id']);
       if ($chat_id) {
         $chat = $this->getChatInstance($chat_id);
-        if (isset($message['group_chat_created'])) {
-          $chat->bot_added_to_chat($message);
-        } else if (isset($message['new_chat_participant'])) {
-          if ($message['new_chat_participant']['id'] == $this->botId) {
-            $chat->bot_added_to_chat($message);
-          }
-        } else if (isset($message['left_chat_participant'])) {
-          if ($message['left_chat_participant']['id'] == $this->botId) {
-            $chat->bot_kicked_from_chat($message);
-          }
-        } else {
-          $text = trim($message['text']);
-          $username = strtolower('@'.$this->botUsername);
-          $username_len = strlen($username);
-          if (strtolower(substr($text, 0, $username_len)) == $username) {
-            $text = trim(substr($text, $username_len));
-          }
-          if (preg_match('/^(?:\/([a-z0-9_]+)(@[a-z0-9_]+)?(?:\s+(.*))?)$/is', $text, $matches)) {
-            $command = $matches[1];
-            $command_owner = strtolower($matches[2]);
-            $command_params = $matches[3];
-            if (!$command_owner || $command_owner == $username) {
-              $method = 'command_'.$command;
-              if (method_exists($chat, $method)) {
-                $chat->$method($command_params, $message);
-              } else {
-                $chat->some_command($command, $command_params, $message);
-              }
-            }
-          } else {
-            $chat->message($text, $message);
-          }
-        }
+        $text = strtolower(trim($message['text']));
+        $chat->message($text, $message);
       }
     }
   }
