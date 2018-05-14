@@ -184,10 +184,10 @@ class PollBotChat extends TelegramBotChat {
           }else{
             $result = "@".$message['from']['first_name']." ".$message['from']['last_name']."\n";
           }
-          $result.= "Name: ".str_replace("/", "", $text)."\n";
-          $result.= "Price(24h): $".$json['RAW'][str_replace("/", "", $text)]['USD']['PRICE']."\n";
-          $result.= "Change(24h): ".round($json['RAW'][str_replace("/", "", $text)]['USD']['CHANGEPCT24HOUR'],2)."%\n";
-          $result.= "Volume(24h): ".(int) $json['RAW'][str_replace("/", "", $text)]['USD']['VOLUME24HOUR']."\n";
+          $result.= "أسم العملة : ".str_replace("/", "", $text)."\n";
+          $result.= "السعر ( 24 س ): $".$json['RAW'][str_replace("/", "", $text)]['USD']['PRICE']."\n";
+          $result.= "التغير ( 24 س ): ".round($json['RAW'][str_replace("/", "", $text)]['USD']['CHANGEPCT24HOUR'],2)."%\n";
+          $result.= "حجم التداول : ".(int) $json['RAW'][str_replace("/", "", $text)]['USD']['VOLUME24HOUR']."\n";
           $this->apiSendMessage($result);
           return;
         }
