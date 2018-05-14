@@ -188,6 +188,7 @@ class PollBotChat extends TelegramBotChat {
           $result.= "السعر ( 24 س ): $".$json['RAW'][str_replace("/", "", $text)]['USD']['PRICE']."\n";
           $result.= "التغير ( 24 س ): ".round($json['RAW'][str_replace("/", "", $text)]['USD']['CHANGEPCT24HOUR'],2)."%\n";
           $result.= "حجم التداول : ".(int) $json['RAW'][str_replace("/", "", $text)]['USD']['VOLUME24HOUR']."\n";
+          $result.= " \n";
           $this->apiSendMessage($result);
           return;
         }
