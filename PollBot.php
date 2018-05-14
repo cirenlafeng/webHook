@@ -178,7 +178,7 @@ class PollBotChat extends TelegramBotChat {
         $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".str_replace("/", "", $text)."&tsyms=USD"),true);
         if(isset($json['RAW']))
         {
-          $result = "@".$message['from']['first_name']." ".$message['from']['last_name']."\n";
+          $result = "@".$message['from']['username']."\n";
           $result.= "Name: ".str_replace("/", "", $text)."\n";
           $result.= "Price(24h): $".$json['RAW'][str_replace("/", "", $text)]['USD']['PRICE']."\n";
           $result.= "Change(24h): ".round($json['RAW'][str_replace("/", "", $text)]['USD']['CHANGEPCT24HOUR'],2)."%\n";
