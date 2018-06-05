@@ -194,6 +194,11 @@ class PollBotChat extends TelegramBotChat {
         }
       }
       
+      if(strstr($text, 'invited'))
+      {
+        return false;
+      }
+
       $this->apiSendMessage("Sorry invalid instruction :".$text."\n Please send like /btc thank you");
       return;
       
