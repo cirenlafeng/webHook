@@ -193,8 +193,8 @@ class PollBotChat extends TelegramBotChat {
           return;
         }
       }
-      exit();
-      if(strstr($text, 'invited'))
+
+      if(strstr($text, 'INVITED') || strstr($text, 'invited'))
       {
         return false;
       }
