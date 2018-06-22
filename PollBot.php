@@ -196,12 +196,22 @@ class PollBotChat extends TelegramBotChat {
 
       if(strstr($text, 'INVITED') || strstr($text, 'invited') ||empty($text))
       {
-        return false;
+        if(isset($message['from']['username']))
+        {
+          $welcome = "@".$message['from']['username']."\n";
+        }else{
+          $welcome = "@".$message['from']['first_name']." ".$message['from']['last_name']."\n";
+        }
+        $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
+        $welcome .= "المنصة العربية لتداول العملات الرقمية "."\n";
+        $welcome .= "https://upex.io/"."\n";
+        $welcome .= "\n";
+        $this->apiSendMessage($welcome);
+        return;
       }
 
-      $this->apiSendMessage("Sorry invalid instruction :".$text."\n Please send like /btc thank you");
+      $this->apiSendMessage("خطأ في الأمر، الرجاء ادخال رمز العمله بالصية التاليه، البيتكوين كمثال  /btc");
       return;
-      
   }
 
 
