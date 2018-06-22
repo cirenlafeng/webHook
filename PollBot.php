@@ -172,7 +172,7 @@ class PollBotChat extends TelegramBotChat {
     }
   }
 
-  public function message($text, $message) {
+  public function message($text, $message , $update) {
       if(strlen($text) <= 6)
       {
         $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".str_replace("/", "", $text)."&tsyms=USD"),true);
@@ -196,16 +196,17 @@ class PollBotChat extends TelegramBotChat {
 
       if(strstr($text, 'INVITED') || strstr($text, 'invited') ||empty($text))
       {
-        if(isset($message['forward_from']['username']))
-        {
-          $welcome = "@".$message['forward_from']['username']."\n";
-        }else{
-          $welcome = "@".$message['forward_from']['first_name']." ".$message['forward_from']['last_name']."\n";
-        }
-        $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
-        $welcome .= "المنصة العربية لتداول العملات الرقمية "."\n";
-        $welcome .= "https://upex.io/"."\n";
-        $welcome .= "\n";
+        // if(isset($message['forward_from']['username']))
+        // {
+        //   $welcome = "@".$message['forward_from']['username']."\n";
+        // }else{
+        //   $welcome = "@".$message['forward_from']['first_name']." ".$message['forward_from']['last_name']."\n";
+        // }
+        // $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
+        // $welcome .= "المنصة العربية لتداول العملات الرقمية "."\n";
+        // $welcome .= "https://upex.io/"."\n";
+        // $welcome .= "\n";
+        $welcome = json_encode($update);
         $this->apiSendMessage($welcome);
         return;
       }

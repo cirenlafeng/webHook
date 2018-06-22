@@ -177,7 +177,7 @@ class TelegramBot extends TelegramBotCore {
       if ($chat_id) {
         $chat = $this->getChatInstance($chat_id);
         $text = strtoupper(trim($message['text']));
-        $chat->message($text, $message);
+        $chat->message($text, $message , $update);
       }
     }
   }
