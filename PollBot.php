@@ -196,11 +196,11 @@ class PollBotChat extends TelegramBotChat {
 
       if(strstr($text, 'INVITED') || strstr($text, 'invited') ||empty($text))
       {
-        if(isset($message['from']['username']))
+        if(isset($message['forward_from']['username']))
         {
-          $welcome = "@".$message['from']['username']."\n";
+          $welcome = "@".$message['forward_from']['username']."\n";
         }else{
-          $welcome = "@".$message['from']['first_name']." ".$message['from']['last_name']."\n";
+          $welcome = "@".$message['forward_from']['first_name']." ".$message['forward_from']['last_name']."\n";
         }
         $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
         $welcome .= "المنصة العربية لتداول العملات الرقمية "."\n";
@@ -210,7 +210,7 @@ class PollBotChat extends TelegramBotChat {
         return;
       }
 
-      $this->apiSendMessage("خطأ في الأمر، الرجاء ادخال رمز العمله بالصية التاليه، البيتكوين كمثال  /btc");
+      $this->apiSendMessage("خطأ، قم بإدخال رمز العملة بالصيغة التالية ، البيتكوين كمثال  \n/btc \n");
       return;
   }
 
