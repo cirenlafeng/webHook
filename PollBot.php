@@ -196,17 +196,17 @@ class PollBotChat extends TelegramBotChat {
 
       if(strstr($text, 'INVITED') || strstr($text, 'invited') ||empty($text))
       {
-        // if(isset($message['forward_from']['username']))
-        // {
-        //   $welcome = "@".$message['forward_from']['username']."\n";
-        // }else{
-        //   $welcome = "@".$message['forward_from']['first_name']." ".$message['forward_from']['last_name']."\n";
-        // }
-        // $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
-        // $welcome .= "المنصة العربية لتداول العملات الرقمية "."\n";
-        // $welcome .= "https://upex.io/"."\n";
-        // $welcome .= "\n";
-        $welcome = json_encode($update);
+        if(isset($message['new_chat_participant']['username']))
+        {
+          $welcome = "@".$message['new_chat_participant']['username']."\n";
+        }else{
+          $welcome = "@".$message['new_chat_participant']['first_name']." ".$message['new_chat_participant']['last_name']."\n";
+        }
+        $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
+        $welcome .= "االمنصة العربية لتداول العملات الرقمية،  "."\n";
+        $welcome .= "ندعوك للتسجيل فيها عبر الرابط التالي"."\n";
+        $welcome .= "https://upex.io/"."\n";
+        $welcome .= "\n";
         $this->apiSendMessage($welcome);
         return;
       }
