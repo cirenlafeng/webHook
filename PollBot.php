@@ -203,7 +203,7 @@ class PollBotChat extends TelegramBotChat {
           $welcome = "@".$message['new_chat_participant']['first_name']." ".$message['new_chat_participant']['last_name']."\n";
         }
         $welcome .= "نرحب  بك  كعضو جديد في مجتمع اب اكس :) "."\n";
-        $welcome .= "االمنصة العربية لتداول العملات الرقمية،  "."\n";
+        $welcome .= "المنصة العربية لتداول العملات الرقمية،"."\n";
         $welcome .= "ندعوك للتسجيل فيها عبر الرابط التالي"."\n";
         $welcome .= "https://upex.io/"."\n";
         $welcome .= "\n";
