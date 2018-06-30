@@ -172,7 +172,7 @@ class PollBotChat extends TelegramBotChat {
     }
   }
 
-  public function message($text, $message , $update) {
+  public function message($text, $message , $update = []) {
       if(strlen($text) <= 6)
       {
         $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".str_replace("/", "", $text)."&tsyms=USD"),true);
