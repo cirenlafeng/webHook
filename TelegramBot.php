@@ -21,7 +21,7 @@ abstract class TelegramBotCore {
   protected $updatesTimeout = 10;
 
   protected $netTimeout = 10;
-  protected $netConnectTimeout = 5;
+  protected $netConnectTimeout = 15;
 
   public function __construct($token, $options = array()) {
     $options += array(
