@@ -210,8 +210,13 @@ class PollBotChat extends TelegramBotChat {
         $this->apiSendMessage($welcome);
         return;
       }
-
-      $this->apiSendMessage("خطأ، قم بإدخال رمز العملة بالصيغة التالية ، البيتكوين كمثال  \n/btc \n");
+      if(strstr($text, '/'))
+      {
+        $this->apiSendMessage("خطأ، قم بإدخال رمز العملة بالصيغة التالية ، البيتكوين كمثال  \n/btc \n");
+        return;
+      }else{
+        return;
+      }
       return;
   }
 
