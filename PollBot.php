@@ -173,9 +173,11 @@ class PollBotChat extends TelegramBotChat {
   }
 
   public function message($text, $message , $update = []) {
+      $text = str_replace('@upex_bot','',$text);
+      
       if(strlen($text) <= 6)
       {
-        $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".str_replace('@upex_bot','',str_replace("/", "", $text))."&tsyms=USD"),true);
+        $json = json_decode(file_get_contents("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=".str_replace("/", "", $text)."&tsyms=USD"),true);
         if(isset($json['RAW']))
         {
           if(isset($message['from']['username']))
