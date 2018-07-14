@@ -173,8 +173,8 @@ class PollBotChat extends TelegramBotChat {
   }
 
   public function message($text, $message , $update = []) {
-      $text = str_replace('@upex_bot','',$text);
-      $text = substr($text,0,strrpos($text,'@'));
+      $text = str_replace('@485853567','',$text);
+      // $text = substr($text,0,strrpos($text,'@'));
       
       if(strlen($text) <= 6)
       {
